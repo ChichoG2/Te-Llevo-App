@@ -78,3 +78,14 @@ $app-theme: mat.define-theme((
 @tailwind utilities;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+ion-content{
+  --color: #fff;
+  --background: #13151A;  
+}
+
+ion-header ion-toolbar, ion-footer ion-toolbar,
+ion-footer ion-toolbar ion-tabs ion-tab-bar{
+  --color: #fff;
+  --background: #1A1A1A;
+}
