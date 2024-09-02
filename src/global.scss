@@ -89,3 +89,17 @@ ion-footer ion-toolbar ion-tabs ion-tab-bar{
   --color: #fff;
   --background: #1A1A1A;
 }
+
+ion-input{
+  font-size: 0.85rem;
+}
+
+ion-button{
+  --background: #fff; 
+}
+
+ion-button p{
+  background: linear-gradient(to right, #1A1A1A, #FFB800);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
