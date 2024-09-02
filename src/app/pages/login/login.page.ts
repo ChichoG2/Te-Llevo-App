@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
@@ -8,15 +9,26 @@ import { Usuario } from 'src/app/helpers/Usuario';
 })
 export class LoginPage implements OnInit {
   nombre!: string;
-  password!: string;
-  logged!:boolean;
+  contrasena!: string;
+  arreglo: Usuario[] = [];
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
     null;
   }
 
-  
+  logear() {
+    this.arreglo = JSON.parse(localStorage.getItem('Usuarios') || '[]');
+    const foundUser = this.arreglo.find(user => 
+      user.nombre === this.nombre && user.contrasena === this.contrasena
+    );
 
+    if (foundUser) {
+      localStorage.setItem('loggedUser', JSON.stringify(foundUser));
+      this.navCtrl.navigateForward(['/index']);
+    } else {
+      console.log('Usuario o contraseña incorrectos');
+    }
+  }
 }

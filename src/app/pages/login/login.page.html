@@ -11,12 +11,12 @@
         <ion-input [(ngModel)]="nombre" label="Usuario" label-placement="floating" fill="outline" placeholder="Ingrese Usuario"></ion-input>
       </div>
       <div class="mt-6">
-        <ion-input [(ngModel)]="password" label="Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Ingrese Contraseña"></ion-input>
+        <ion-input [(ngModel)]="contrasena" label="Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Ingrese Contraseña"></ion-input>
       </div>
       <div class="mt-3 ml-1">
-        <a routerLink="/register">No tienes cuenta?.. Registrate Aqui!</a>
+        <a routerLink="/register" class="font-semibold">No tienes cuenta?.. Registrate Aquí!</a>
       </div>
-      <ion-button expand="block" class="mt-8">
+      <ion-button expand="block" class="mt-8" (click)="logear()">
         <p>Inicia Sesión</p>
       </ion-button>
     </section>
