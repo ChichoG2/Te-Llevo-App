@@ -1,0 +1,37 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <div class="mt-4">
+    <div class="flex justify-center">
+        <img src="assets/img/Logo.png" alt="Logo DuocUC" height="45" width="200">
+    </div>
+
+    <section class="ml-4 mr-4 mt-6">
+      <div class="mt-6">
+        <ion-input [(ngModel)]="nombre" label="Usuario" label-placement="floating" fill="outline" placeholder="Ingrese Usuario"></ion-input>
+      </div>
+      <div class="mt-6">
+        <ion-input [(ngModel)]="contrasena" label="Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Ingrese Contraseña"></ion-input>
+      </div>
+      <div class="mt-6 flex justify-center">
+        <p class="text-xl">
+          Conductor
+          <mat-slide-toggle labelPosition="before" [(ngModel)]="esConductor"></mat-slide-toggle>
+        </p>
+      </div>
+      <div class="mt-3 ml-1">
+        <a routerLink="/login" class="font-semibold">Tienes cuenta?.. Inicia sesión Aquí!</a>
+      </div>
+      <ion-button expand="block" class="mt-8" (click)="registrar()">
+        <p>Registrarse</p>
+      </ion-button>
+    </section>
+  </div>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar class="relative">
+    <div class="fade-line"></div>
+  </ion-toolbar>
+</ion-footer>

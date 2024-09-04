@@ -1,0 +1,13 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="text-center">
+    @if(logged){
+      <div class="absolute z-50 justify-start ml-2 bottom-1">
+        <ion-button size="default" shape="round" (click)="goHome()" fill="clear">
+          <ion-icon color="light" slot="icon-only" name="home"></ion-icon>
+        </ion-button>
+      </div>
+    }
+    <ion-title class="font-bold text-xl">Te Llevo App</ion-title>
+    <div class="fade-line"></div>
+  </ion-toolbar>
+</ion-header>
