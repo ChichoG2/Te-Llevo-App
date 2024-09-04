@@ -14,6 +14,8 @@ export class FooterComponent  implements OnInit {
     null;
   }
 
-  
+  cuenta(){
+    this.navCtr.navigateForward(["/cuenta"]);
+  }
 
 }
