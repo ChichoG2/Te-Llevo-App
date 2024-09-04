@@ -6,3 +6,7 @@
     height: 2px;
     background: linear-gradient(to right, #1A1A1A 0%, #ffffff 50%, #1A1A1A 100%);
 }
+
+ion-button{
+    --background: none;
+}
