@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule)
+    loadChildren: () => import('./pages/usuario/index/index.module').then( m => m.IndexPageModule)
   },
   {
     path: 'login',
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'cuenta',
+    loadChildren: () => import('./pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
   },
 ];
 
