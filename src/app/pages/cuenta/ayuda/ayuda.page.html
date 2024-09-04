@@ -1,0 +1,46 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <h2 class="text-center font-bold mt-10 text-xl">Ayuda</h2>
+
+  <section>
+    <div class="flex justify-center mt-4">
+      <mat-card class="card" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Preguntas Frecuentes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="flex mt-1">
+            <mat-icon>star_outline</mat-icon>
+            <h3 class="mt-0.5">¿Qué pasa si se cancela el viaje?</h3>
+          </div>
+          <p class="text-gray-500 text-center">
+            Si el viaje se cancela el dinero se devolverá a tu cuenta
+            automáticamente.
+          </p>
+        </mat-card-content>
+        <mat-card-content>
+          <div class="flex mt-1">
+            <mat-icon>star_outline</mat-icon>
+            <h3 class="mt-0.5">¿Qué hago si olvidé algo en el vehículo?</h3>
+          </div>
+          <p class="text-gray-500 text-center">
+            Si olvidaste un objeto en el vehículo, abre la aplicación y accede a
+            tu historial de viajes. Selecciona el viaje correspondiente y verás
+            una opción para contactar con el conductor. Puedes llamarlo
+            directamente o enviarle un mensaje para coordinar la recuperación de
+            tu objeto perdido.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <div class="flex justify-center">
+      <button class="button" mat-flat-button routerLink="./reportar-error">Reportar Error</button>
+    </div>
+  </section>
+</ion-content>
+
+<app-footer />
