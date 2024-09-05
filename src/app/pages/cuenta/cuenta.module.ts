@@ -11,6 +11,7 @@ import { SharedModule } from "../../components/shared/shared.module";
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
     SharedModule,
     MatIconModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSlideToggleModule
 ],
   declarations: [CuentaPage]
 })

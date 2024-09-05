@@ -4,27 +4,68 @@
   <div class="flex justify-center mt-2">
     <img src="assets/img/icon-user.png" alt="User Icon">
   </div>
-  <h2 class="text-center">[USER]</h2>
+  <h2 class="text-center">{{user.nombre}}</h2>
 
   <section>
     <div class="flex flex-wrap justify-center mt-6 gap-4">
-      <button mat-fab class="flex flex-col items-center hover:bg-slate-900">
+      <button mat-fab class="flex flex-col items-center hover:bg-[#3c3744] hover:scale-110" routerLink="./ayuda">
         <mat-icon class="mb-1 text-2xl">sync_problem</mat-icon>
         <span class="text-sm">Ayuda</span>
       </button>
-      <button mat-fab class="flex flex-col items-center hover:bg-slate-900">
+      <button mat-fab class="flex flex-col items-center hover:bg-[#3c3744] hover:scale-110" routerLink="./pagos">
         <mat-icon class="mb-1 text-2xl">payments</mat-icon>
         <span class="text-sm">Pago</span>
       </button>
-      <button mat-fab class="flex flex-col items-center hover:bg-slate-900">
+      <button mat-fab class="flex flex-col items-center hover:bg-[#3c3744] hover:scale-110" routerLink="./notificaciones">
         <mat-icon class="mb-1 text-2xl">notifications_active</mat-icon>
         <span class="text-sm">Notificaciones</span>
       </button>
     </div>
   </section>
-  
-  <section>
 
+  <section class="mt-10">
+    <div class="flex flex-row items-center justify-between mx-4 mt-6 sm:mx-20">
+      <h2 class="sm:text-lg md:text-lg sm:mb-0">Cuenta Asociada:</h2>
+      <ion-item class="rounded-lg">
+        <ion-input 
+          class="bg-white text-black text-center" 
+          type="text" 
+          maxlength="12"
+          placeholder="*** *** *** ***">
+        </ion-input>
+      </ion-item>
+    </div>
+    <hr class="mt-4 border-[#1b1b1e]">
+    <div class="flex flex-row items-center justify-between mx-4 mt-6 sm:mx-20">
+      <h2 class="sm:text-lg md:text-lg sm:mb-0">Activar Notificaciones:</h2>
+      <mat-slide-toggle class="scale-110" labelPosition="before" [(ngModel)]="notificacion"></mat-slide-toggle>
+    </div>
+    <hr class="mt-4 border-[#1b1b1e]">
+    <div class="flex flex-row items-center justify-between mx-4 mt-6 sm:mx-20">
+      <h2 class="sm:text-lg md:text-lg sm:mb-0">Patente Asociada:</h2>
+      <ion-item class="rounded-lg">
+        <ion-input 
+          class="bg-white text-black text-center" 
+          type="text" 
+          maxlength="12"
+          placeholder="AA-BB-99">
+        </ion-input>
+      </ion-item>
+    </div>
+    <hr class="mt-4 border-[#1b1b1e]">
+    <div class="flex flex-row items-center justify-between mx-4 mt-6 sm:mx-20">
+      <h2 class="sm:text-lg md:text-lg sm:mb-0">Conductor:</h2>
+      <mat-slide-toggle class="scale-110" labelPosition="before" [(ngModel)]="esConductor"></mat-slide-toggle>
+    </div>
+    <hr class="mt-4 border-[#1b1b1e]">
+  </section>
+
+  <section class="mt-10">
+    <div class="flex justify-center gap-8 custom-gap">
+      <button class="ac-button" mat-flat-button routerLink="./asociar-cuenta">Asociar Cuenta</button>
+      <button class="cs-button" mat-flat-button id="open-action-sheet">Cerrar Sesión</button>
+      <ion-action-sheet trigger="open-action-sheet" header="Cerrar Sesión" [buttons]="actionSheetButtons"></ion-action-sheet>
+    </div>
   </section>
 
 </ion-content>
