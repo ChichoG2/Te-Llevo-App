@@ -1,0 +1,32 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <h2 class="text-center font-bold text-xl mt-4">Reportar Error</h2>
+
+  <section class="mt-4">
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-input label="Asunto" labelPlacement="stacked" placeholder="Asunto..."></ion-input>
+        </ion-item>
+        <ion-item class="mt-4">
+          <ion-textarea label="Mensaje" placeholder="Mensaje..." clearOnEdit="true"></ion-textarea>  
+        </ion-item>
+        <div class="flex justify-center mt-2">
+          <ion-button id="present-alert">
+            <ion-icon name="warning-outline" slot="start"></ion-icon>
+            Reportar Error</ion-button>
+          <ion-alert
+            id="custom-alert"
+            trigger="present-alert"
+            header="Reporte Error"
+            message="Se ha enviado su reporte correctamente, gracias por su aporte!"
+            [buttons]="alertButtons"
+          ></ion-alert>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </section>
+</ion-content>
+
+<app-footer />

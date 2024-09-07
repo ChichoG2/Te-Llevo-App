@@ -12,7 +12,7 @@ export class HeaderComponent  implements OnInit {
   constructor(private ctrNav: NavController) { }
 
   ngOnInit() {
-    if(localStorage.getItem('currentUser')){
+    if(localStorage.getItem('loggedUser')){
       this.logged = true;
     } else{
       this.logged = false;

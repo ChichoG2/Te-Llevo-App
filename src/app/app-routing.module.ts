@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { conductorGuard } from './helpers/guards/conductor.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'index',
+    canActivate:[conductorGuard],
     loadChildren: () => import('./pages/usuario/index/index.module').then( m => m.IndexPageModule)
   },
   {
@@ -27,15 +29,13 @@ const routes: Routes = [
     path: 'cuenta',
     loadChildren: () => import('./pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
   },
-
-
-
-
-
-
   {
     path: 'viaje',
     loadChildren: () => import('./pages/usuario/viaje/viaje.module').then( m => m.ViajePageModule)
+  },
+  {
+    path: 'reestablecer-contrasena',
+    loadChildren: () => import('./pages/reestablecer-contrasena/reestablecer-contrasena.module').then( m => m.ReestablecerContrasenaPageModule)
   },
 
 ];

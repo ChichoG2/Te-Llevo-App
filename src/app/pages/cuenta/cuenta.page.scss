@@ -4,3 +4,35 @@ button {
     background-color: #1A1A1A;
     color: #fff;
 }
+
+.ac-button{
+    width: 170px;
+    height: 35px;
+    border-radius: 8px !important;
+    background-color: #FFB800 !important;
+    color: #fff !important;
+}
+
+.cs-button{
+    width: 170px;
+    height: 35px;
+    border-radius: 8px !important;
+    background-color: #EC221F !important;
+    color: #dadada !important;
+}
+
+@media (max-width: 375px){
+    .custom-gap {
+      gap: 6px; 
+    }
+    h2{
+        font-size: 14px;
+    }
+}
+
+@media (max-width:320px){
+    .ac-button, .cs-button{
+        font-size: 12px;
+        width: 90px;
+    }
+}
