@@ -1,0 +1,31 @@
+ion-content{
+    --background: #AFAFAF;
+}
+
+ion-button{
+    --background: #F1F1F1;
+    width: 181px;
+    height: 33px;
+}
+
+ion-button p{
+    background: #000;
+    background-clip: text;
+}
+
+ion-button span{
+    background: #172554;
+    background-clip: text;
+}
+
+.cancel{
+    --background: #EC221F;
+    p{
+        background: #fff;
+        background-clip: text;
+    }
+    &:hover{
+        transform: scale(1.03);
+        transition: all 0.3s;
+    }
+}
