@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
   selector: 'app-footer',
@@ -7,11 +8,15 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent  implements OnInit {
+  user!: Usuario;
+  esConductor!: boolean;
 
   constructor(private navCtr: NavController) { }
 
   ngOnInit() {
-    null;
+    this.user = JSON.parse(localStorage.getItem("loggedUser") || "[]");
+    this.esConductor = this.user.esConductor;
+    console.log(this.esConductor);
   }
 
   cuenta(){
@@ -19,7 +24,11 @@ export class FooterComponent  implements OnInit {
   }
 
   viaje(){
-    this.navCtr.navigateForward(["/viaje"]);
+    if(!this.esConductor){
+      this.navCtr.navigateForward(["/viaje"]);
+    } else{
+      this.navCtr.navigateForward(["/planear-viaje"]);
+    }
   }
 
 

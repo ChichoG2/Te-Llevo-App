@@ -14,7 +14,6 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    canActivate:[conductorGuard],
     loadChildren: () => import('./pages/usuario/index/index.module').then( m => m.IndexPageModule)
   },
   {
@@ -37,6 +36,12 @@ const routes: Routes = [
     path: 'reestablecer-contrasena',
     loadChildren: () => import('./pages/reestablecer-contrasena/reestablecer-contrasena.module').then( m => m.ReestablecerContrasenaPageModule)
   },
+  {
+    path: 'planear-viaje',
+    canActivate:[conductorGuard],
+    loadChildren: () => import('./pages/conductor/planear-viaje/planear-viaje.module').then( m => m.PlanearViajePageModule)
+  },
+
 
 ];
 
