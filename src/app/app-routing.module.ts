@@ -30,6 +30,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
   },
   {
+    path: 'viaje',
+    loadChildren: () => import('./pages/usuario/viaje/viaje.module').then( m => m.ViajePageModule)
+  },
+  {
     path: 'reestablecer-contrasena',
     loadChildren: () => import('./pages/reestablecer-contrasena/reestablecer-contrasena.module').then( m => m.ReestablecerContrasenaPageModule)
   },

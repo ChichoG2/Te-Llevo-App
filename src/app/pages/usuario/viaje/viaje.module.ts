@@ -4,19 +4,22 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { IndexPageRoutingModule } from './index-routing.module';
+import { ViajePageRoutingModule } from './viaje-routing.module';
 
-import { IndexPage } from './index.page';
+import { ViajePage } from './viaje.page';
 import { SharedModule } from "../../../components/shared/shared.module";
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    IndexPageRoutingModule,
+    ViajePageRoutingModule,
     SharedModule,
-],
-  declarations: [IndexPage]
+    MatMenuModule,
+  ],
+  declarations: [ViajePage]
 })
-export class IndexPageModule {}
+export class ViajePageModule {}
