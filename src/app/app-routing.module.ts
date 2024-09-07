@@ -41,6 +41,12 @@ const routes: Routes = [
     canActivate:[conductorGuard],
     loadChildren: () => import('./pages/conductor/planear-viaje/planear-viaje.module').then( m => m.PlanearViajePageModule)
   },
+  {
+    path: 'confirmar-viaje',
+    canActivate:[conductorGuard],
+    loadChildren: () => import('./pages/conductor/confirmar-viaje/confirmar-viaje.module').then( m => m.ConfirmarViajePageModule)
+  },
+
 
 
 ];

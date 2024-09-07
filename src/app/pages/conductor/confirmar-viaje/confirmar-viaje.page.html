@@ -1,0 +1,22 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <div class="flex justify-center mt-5 ml-2 mr-2">
+    <img src="assets/img/GeoLocation.png" alt="">
+  </div>
+  <p class="text-center mt-5">Salida: [SALIDA] Destino: [DESTINO]</p>
+  <div class="flex justify-center">
+    <ion-button expand="block" class="mt-8" id="present-alert">
+      <p>Iniciar Viaje</p>
+    </ion-button>
+    <ion-alert
+            id="custom-alert"
+            trigger="present-alert"
+            header="Confirmación de viaje"
+            message="Se ha confirmado un viaje, no llegues tarde!!"
+            [buttons]="alertButtons"
+          ></ion-alert>
+  </div>
+</ion-content>
+
+<app-footer />
