@@ -1,0 +1,23 @@
+ion-content{
+    --background: #AFAFAF;
+}
+
+.qr{
+    --background: #f3b61f;
+    width: 181px;
+    height: 33px;
+    p{
+        background: #fff;
+        background-clip: text;
+    }
+}
+
+.viaje{
+    --background: #307FE2;
+    width: 181px;
+    height: 33px;
+    p{
+        background: #fff;
+        background-clip: text;
+    }
+}

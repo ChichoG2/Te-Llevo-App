@@ -45,14 +45,15 @@ const routes: Routes = [
     path: 'confirmar-viaje',
     canActivate:[conductorGuard],
     loadChildren: () => import('./pages/conductor/confirmar-viaje/confirmar-viaje.module').then( m => m.ConfirmarViajePageModule)
-  },  {
+  },
+  {
     path: 'viaje-vivo',
     loadChildren: () => import('./pages/conductor/viaje-vivo/viaje-vivo.module').then( m => m.ViajeVivoPageModule)
   },
-
-
-
-
+  {
+    path: 'iniciar-viaje',
+    loadChildren: () => import('./pages/conductor/iniciar-viaje/iniciar-viaje.module').then( m => m.IniciarViajePageModule)
+  },
 ];
 
 @NgModule({
