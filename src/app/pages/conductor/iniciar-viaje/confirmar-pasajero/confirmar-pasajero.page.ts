@@ -16,7 +16,7 @@ export class ConfirmarPasajeroPage implements OnInit {
 
   continuar(){
     setTimeout(() => {
-      this.navCtrl.navigateForward(["/iniciar-viaje"])
+      this.navCtrl.navigateForward(["iniciar-viaje/confirmar-pasajero/confirmar-pago"])
     }, 1500);
   }
 

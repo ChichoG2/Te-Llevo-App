@@ -1,0 +1,23 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <div class="text-center text-xl mt-5 font-semibold">
+    <h1>Confirmar Pago</h1>
+    <h2 class="mt-4">En [efectivo]</h2>
+  </div>
+  <div class="text-center text-xl mt-20 font-semibold">
+    <h1>Costo del Viaje:</h1>
+    <h2 class="mt-2">$5000</h2>
+  </div>
+  <div class="flex justify-center">
+    <ion-button
+      expand="block"
+      class="viaje mt-10 ml-2 mr-2"
+      (click)="continuar()"
+    >
+      <p class="text-xl">Confirmar Pago</p>
+    </ion-button>
+  </div>
+</ion-content>
+
+<app-footer />

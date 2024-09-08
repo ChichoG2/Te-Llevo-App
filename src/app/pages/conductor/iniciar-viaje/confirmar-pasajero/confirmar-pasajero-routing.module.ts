@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ConfirmarPasajeroPage
+  },  {
+    path: 'confirmar-pago',
+    loadChildren: () => import('./confirmar-pago/confirmar-pago.module').then( m => m.ConfirmarPagoPageModule)
   }
+
 ];
 
 @NgModule({
