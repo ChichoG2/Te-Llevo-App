@@ -61,6 +61,11 @@ const routes: Routes = [
     canActivate:[conductorGuard],
     loadChildren: () => import('./pages/conductor/index-conductor/index-conductor.module').then( m => m.IndexConductorPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/page404/page404.module').then( m => m.Page404PageModule)
+  },
+
 
 ];
 
