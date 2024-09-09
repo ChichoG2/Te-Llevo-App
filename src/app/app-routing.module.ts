@@ -48,10 +48,12 @@ const routes: Routes = [
   },
   {
     path: 'viaje-vivo',
+    canActivate:[conductorGuard],
     loadChildren: () => import('./pages/conductor/viaje-vivo/viaje-vivo.module').then( m => m.ViajeVivoPageModule)
   },
   {
     path: 'iniciar-viaje',
+    canActivate:[conductorGuard],
     loadChildren: () => import('./pages/conductor/iniciar-viaje/iniciar-viaje.module').then( m => m.IniciarViajePageModule)
   },
 ];
