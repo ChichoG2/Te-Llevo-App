@@ -56,6 +56,12 @@ const routes: Routes = [
     canActivate:[conductorGuard],
     loadChildren: () => import('./pages/conductor/iniciar-viaje/iniciar-viaje.module').then( m => m.IniciarViajePageModule)
   },
+  {
+    path: 'index-conductor',
+    canActivate:[conductorGuard],
+    loadChildren: () => import('./pages/conductor/index-conductor/index-conductor.module').then( m => m.IndexConductorPageModule)
+  },
+
 ];
 
 @NgModule({

@@ -7,6 +7,6 @@ export const conductorGuard: CanActivateFn = (route, state) => {
   if(loggedUser.esConductor){
     return true;
   }
-  router.navigate(['/register'])
+  router.navigate(['/index'])
   return false;
 };

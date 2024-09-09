@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { conductorGuard } from 'src/app/helpers/guards/conductor.guard';
 import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
@@ -26,7 +27,11 @@ export class LoginPage implements OnInit {
 
     if (foundUser) {
       localStorage.setItem('loggedUser', JSON.stringify(foundUser));
-      this.navCtrl.navigateForward(['/index']);
+      if(foundUser.esConductor){
+        this.navCtrl.navigateForward(['/index-conductor']);
+      } else{
+        this.navCtrl.navigateForward(["/index"])
+      }
     } else {
       console.log('Usuario o contraseña incorrectos');
     }

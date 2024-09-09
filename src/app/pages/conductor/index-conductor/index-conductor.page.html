@@ -1,0 +1,54 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+    <ion-title class="font-bold text-2xl text-center m-8 mt-20">Bienvenido, {{user.nombre}}</ion-title>
+        <div class="flex justify-center text-center">
+            <ion-card class="mx-8">
+                <ion-card-content class="ml-4 mr-7">
+                    <ion-list>
+                        <ion-card-title class="mt-2">
+                            TUS VIAJES PROGRAMADOS
+                        </ion-card-title>
+                        <ion-item>
+                        </ion-item>
+                        <ion-item>
+                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
+                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
+                            <ion-button routerLink="/iniciar-viaje">
+                              <p>Detalles</p>
+                            </ion-button>
+                        </ion-item>
+                        <ion-item>
+                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
+                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
+                            <ion-button routerLink="/iniciar-viaje">
+                              <p>Detalles</p>
+                            </ion-button>
+                        </ion-item>
+                        <ion-item>
+                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
+                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
+                            <ion-button routerLink="/iniciar-viaje">
+                              <p>Detalles</p>
+                            </ion-button>
+                        </ion-item>
+
+                    </ion-list>
+                </ion-card-content>    
+            </ion-card>
+        </div>
+
+        <ion-title class="font-bold text-xl text-center m-6">Ultimas Notificaciones</ion-title>
+
+        <div class="flex justify-center text-left">
+            <ion-card class="rounded-3xl bg-white w-9/12 h-16">
+                <ion-card-header>
+                <ion-card-title class="-mt-2"><span class="text-neutral-950 text-base">Notificacion por defecto</span></ion-card-title>
+                <ion-card-subtitle>Texto de notificacion por defecto</ion-card-subtitle>
+                </ion-card-header>
+
+            </ion-card>
+        </div>
+</ion-content>
+
+<app-footer />
