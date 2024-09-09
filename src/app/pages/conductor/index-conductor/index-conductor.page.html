@@ -3,36 +3,39 @@
 <ion-content [fullscreen]="true">
     <ion-title class="font-bold text-2xl text-center m-8 mt-20">Bienvenido, {{user.nombre}}</ion-title>
         <div class="flex justify-center text-center">
-            <ion-card class="mx-8">
-                <ion-card-content class="ml-4 mr-7">
+            <ion-card class="">
+                <ion-card-content class="">
                     <ion-list>
                         <ion-card-title class="mt-2">
                             TUS VIAJES PROGRAMADOS
                         </ion-card-title>
                         <ion-item>
+                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
+                            <span class="p-1">hora: 00:00</span><span class="p-1">destino:[Direccion]</span>
+                            <div class="ml-auto">
+                                <ion-button routerLink="/iniciar-viaje">
+                                  <p>Detalles</p>
+                                </ion-button>
+                            </div>
                         </ion-item>
                         <ion-item>
                             <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
-                            <ion-button routerLink="/iniciar-viaje">
-                              <p>Detalles</p>
-                            </ion-button>
+                            <span class="p-1">hora: 00:00</span><span class="p-1">destino:[Direccion]</span>
+                            <div class="ml-auto">
+                                <ion-button routerLink="/iniciar-viaje">
+                                  <p>Detalles</p>
+                                </ion-button>
+                            </div>
                         </ion-item>
                         <ion-item>
                             <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
-                            <ion-button routerLink="/iniciar-viaje">
-                              <p>Detalles</p>
-                            </ion-button>
+                            <span class="p-1">hora: 00:00</span><span class="p-1">destino:[Direccion]</span>
+                            <div class="ml-auto">
+                                <ion-button routerLink="/iniciar-viaje">
+                                  <p>Detalles</p>
+                                </ion-button>
+                            </div>
                         </ion-item>
-                        <ion-item>
-                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
-                            <ion-button routerLink="/iniciar-viaje">
-                              <p>Detalles</p>
-                            </ion-button>
-                        </ion-item>
-
                     </ion-list>
                 </ion-card-content>    
             </ion-card>

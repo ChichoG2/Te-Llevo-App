@@ -5,3 +5,15 @@ ion-button{
         background-clip: text;
     }
 }
+
+@media (max-width:320px){
+    span{
+        font-size: 12px;
+    }
+    ion-button{
+        width: 60px;
+        p{
+            font-size: 10px;
+        }
+    }
+}
