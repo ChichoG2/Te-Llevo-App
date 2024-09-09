@@ -1,37 +1,61 @@
 <app-header />
 
 <ion-content [fullscreen]="true">    
-    <ion-title class="font-bold text-2xl text-center m-8 mt-20">Buscando Viaje...</ion-title>
+    <ion-title class="font-bold text-2xl text-center m-8 mt-16">Buscando Viaje...</ion-title>
     <div class="flex justify-center">
-      <img src="assets/img/mapa.png" alt="User Icon" class="h-3/5 w-3/5 ">
+      <img src="assets/img/mapa.png" alt="User Icon" class="">
+    </div>
+    <div class="flex justify-center mt-6">
+    <ion-list class="justify-center min-w-64">
+      <ion-item>
+        <ion-select
+          label="Conductor"
+          interface="action-sheet"
+          placeholder="Conductores"
+          cancelText="Cancelar"
+        >
+          <ion-select-option value="Kitty $5000">Kitty $5000</ion-select-option>
+          <ion-select-option value="Kitty $6000">Kitty $6000</ion-select-option>
+          <ion-select-option value="Kitty $7000">Kitty $7000</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
     </div>
 
-    <div class="flex justify-center mt-4">
-      <button mat-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" class="w-5/6 content-center justify-center">
-        <ion-card class="rounded-3xl bg-white w-3/6 h-20 ml-36">
-          <div class="flex  bg-white justify-center">
-            <ion-card-content class="-mt-2">
-                    <div class="flex flex-row">
-                      <img src="assets/img/icon-user.png" alt="User Icon" height="70" width="70">
-                      <span class="text-black text-2xl mx-auto self-center">{{ opcionSeleccionada }}</span>
-                      <img src="assets/img/flecha_despliegue.png" alt="Despligue" height="70" width="70">
-                    </div>
+    <div class="flex justify-center mt-6">
+ 
+      <ion-button id="open-modal" expand="block"><p>Iniciar viaje</p></ion-button>
+      
+      <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+        <ng-template>
+          <div>
 
-                <mat-menu #menu="matMenu" class="w-full">
-                  <button mat-menu-item (click)="seleccionarOpcion('Kitty $5000'); menuTrigger.closeMenu()" class="mx-96">Kitty $5000</button>
-                  <button mat-menu-item (click)="seleccionarOpcion('Kitty $6000'); menuTrigger.closeMenu()">Kitty $6000</button>
-                  <button mat-menu-item (click)="seleccionarOpcion('Kitty $7000'); menuTrigger.closeMenu()">Kitty $7000</button>
-                </mat-menu>
-            </ion-card-content>
+            <div class="flex justify-center mt-16 flex-row">
+              <ion-list class="justify-center min-w-64">
+                <ion-item>
+                  <ion-select
+                    label="Metodo"
+                    interface="action-sheet"
+                    placeholder="Pago"
+                    cancelText="Cancelar"
+                  >
+                    <ion-select-option value="Debito">Debito</ion-select-option>
+                    <ion-select-option value="Credito">Credito</ion-select-option>
+                    <ion-select-option value="Efectivo">Efectivo</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+          
+            </div>
+            <div class="flex flex-row justify-center mt-6 mb-20">
+              <ion-button (click)="index('top')"><p>Confirmar</p></ion-button>
+            </div>
           </div>
-
-          </ion-card>
-        </button>
-
+        </ng-template>
+      </ion-modal>
     </div>
-
     
-
 </ion-content>
 
 
