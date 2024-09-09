@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
@@ -9,7 +9,7 @@ import { Usuario } from 'src/app/helpers/Usuario';
 })
 export class CuentaPage implements OnInit {
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private alertController: AlertController) { }
   user!: Usuario;
   notificacion: boolean = false;
   esConductor!: boolean;
@@ -40,6 +40,45 @@ export class CuentaPage implements OnInit {
       },
     },
   ];
+
+  onToggleChange() {
+    if (this.esConductor) {
+      this.presentAlert(); 
+    }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Ingresa tu patente',
+      inputs: [
+        {
+          name: 'patente',
+          type: 'text',
+          placeholder: 'Patente del automóvil'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelado');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            this.savePatente(data.patente);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  
+  savePatente(patente: string) {
+    console.log('Patente ingresada:', patente);
+  }
 
   cerrarSesion(){
     localStorage.removeItem("loggedUser")
