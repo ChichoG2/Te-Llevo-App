@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ViajePage
+  },  {
+    path: 'vivo',
+    loadChildren: () => import('./vivo/vivo.module').then( m => m.VivoPageModule)
   }
+
 ];
 
 @NgModule({

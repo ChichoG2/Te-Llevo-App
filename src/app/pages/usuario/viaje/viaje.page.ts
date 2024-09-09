@@ -16,6 +16,7 @@ export class ViajePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    null;
   }
 
   async index(position: 'top' | 'middle' | 'bottom') {
@@ -29,7 +30,7 @@ export class ViajePage implements OnInit {
     await toast.present();
 
     this.modalController.dismiss();
-    this.navCtr.navigateForward(["/index"]);
+    this.navCtr.navigateForward(["viaje/vivo"]);
     }
 
 }
