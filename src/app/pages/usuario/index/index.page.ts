@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
   selector: 'app-index',
@@ -9,7 +10,10 @@ export class IndexPage implements OnInit {
 
   constructor() { }
 
+  user!: Usuario;
+
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem("loggedUser") || "[]");
   }
 
 }
