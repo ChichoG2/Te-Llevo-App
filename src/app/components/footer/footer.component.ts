@@ -23,6 +23,14 @@ export class FooterComponent  implements OnInit {
     this.navCtr.navigateForward(["/cuenta"]);
   }
 
+  listaViajes(){
+    if(!this.esConductor){
+      this.navCtr.navigateForward(["/listar-viaje"]);
+    } else{
+      this.navCtr.navigateForward(["/listar-viaje-conductor"]);
+    }
+  }
+
   viaje(){
     if(!this.esConductor){
       this.navCtr.navigateForward(["/viaje"]);

@@ -62,10 +62,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/conductor/index-conductor/index-conductor.module').then( m => m.IndexConductorPageModule)
   },
   {
+    path: 'listar-viaje',
+    loadChildren: () => import('./pages/usuario/listar-viaje/listar-viaje.module').then( m => m.ListarViajePageModule)
+  },
+  {
+    path: 'listar-viaje-conductor',
+    canActivate:[conductorGuard],
+    loadChildren: () => import('./pages/conductor/listar-viaje-conductor/listar-viaje-conductor.module').then( m => m.ListarViajeConductorPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/page404/page404.module').then( m => m.Page404PageModule)
   },
-
 
 ];
 
