@@ -15,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'index',
+    canActivate:[loginGuard],
     loadChildren: () => import('./pages/usuario/index/index.module').then( m => m.IndexPageModule)
   },
   {
@@ -27,10 +28,12 @@ const routes: Routes = [
   },
   {
     path: 'cuenta',
+    canActivate:[loginGuard],
     loadChildren: () => import('./pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
   },
   {
     path: 'viaje',
+    canActivate:[loginGuard],
     loadChildren: () => import('./pages/usuario/viaje/viaje.module').then( m => m.ViajePageModule)
   },
   {
@@ -39,27 +42,27 @@ const routes: Routes = [
   },
   {
     path: 'planear-viaje',
-    canActivate:[conductorGuard],
+    canActivate:[conductorGuard,loginGuard],
     loadChildren: () => import('./pages/conductor/planear-viaje/planear-viaje.module').then( m => m.PlanearViajePageModule)
   },
   {
     path: 'confirmar-viaje',
-    canActivate:[conductorGuard],
+    canActivate:[conductorGuard,loginGuard],
     loadChildren: () => import('./pages/conductor/confirmar-viaje/confirmar-viaje.module').then( m => m.ConfirmarViajePageModule)
   },
   {
     path: 'viaje-vivo',
-    canActivate:[conductorGuard],
+    canActivate:[conductorGuard,loginGuard],
     loadChildren: () => import('./pages/conductor/viaje-vivo/viaje-vivo.module').then( m => m.ViajeVivoPageModule)
   },
   {
     path: 'iniciar-viaje',
-    canActivate:[conductorGuard],
+    canActivate:[conductorGuard,loginGuard],
     loadChildren: () => import('./pages/conductor/iniciar-viaje/iniciar-viaje.module').then( m => m.IniciarViajePageModule)
   },
   {
     path: 'index-conductor',
-    canActivate:[conductorGuard],
+    canActivate:[conductorGuard,loginGuard],
     loadChildren: () => import('./pages/conductor/index-conductor/index-conductor.module').then( m => m.IndexConductorPageModule)
   },
   {
@@ -68,7 +71,7 @@ const routes: Routes = [
   },
   {
     path: 'listar-viaje-conductor',
-    canActivate:[conductorGuard],
+    canActivate:[conductorGuard,loginGuard],
     loadChildren: () => import('./pages/conductor/listar-viaje-conductor/listar-viaje-conductor.module').then( m => m.ListarViajeConductorPageModule)
   },
   {
