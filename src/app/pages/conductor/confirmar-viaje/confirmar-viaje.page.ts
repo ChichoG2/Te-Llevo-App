@@ -23,7 +23,7 @@ export class ConfirmarViajePage implements OnInit {
   }
 
   redirectAccount(){
-    this.navCtrl.navigateForward(["/index"])
+    this.navCtrl.navigateForward(["/index-conductor"])
   }
 
 }

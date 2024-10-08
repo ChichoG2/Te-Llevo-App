@@ -23,6 +23,7 @@ export class ReportarErrorPage implements OnInit {
   }
 
   ngOnInit() {
+    null;
   }
 
 
