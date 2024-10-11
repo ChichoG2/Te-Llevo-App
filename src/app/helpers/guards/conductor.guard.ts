@@ -1,10 +1,14 @@
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { inject } from '@angular/core';
 
 export const conductorGuard: CanActivateFn = (route, state) => {
-  const router = new Router();
-  const loggedUser = JSON.parse(localStorage.getItem("loggedUser")||"[]");
+  const router = inject(Router);
+  const auth = inject(AuthService);
 
-  if(loggedUser.esConductor){
+  const loggedUser = auth.getUser();
+
+  if (loggedUser.esConductor) {
     return true;
   }
   router.navigate(['/index'])
