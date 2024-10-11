@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { conductorGuard } from './helpers/guards/conductor.guard';
 import { loginGuard } from './helpers/guards/login.guard';
+import { usuarioGuard } from './helpers/guards/usuario.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    canActivate:[loginGuard],
+    canActivate:[loginGuard, usuarioGuard],
     loadChildren: () => import('./pages/usuario/index/index.module').then( m => m.IndexPageModule)
   },
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'viaje',
-    canActivate:[loginGuard],
+    canActivate:[loginGuard, usuarioGuard],
     loadChildren: () => import('./pages/usuario/viaje/viaje.module').then( m => m.ViajePageModule)
   },
   {
@@ -67,6 +68,7 @@ const routes: Routes = [
   },
   {
     path: 'listar-viaje',
+    canActivate:[usuarioGuard],
     loadChildren: () => import('./pages/usuario/listar-viaje/listar-viaje.module').then( m => m.ListarViajePageModule)
   },
   {
