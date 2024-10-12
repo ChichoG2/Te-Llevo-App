@@ -49,7 +49,8 @@ export class RegisterPage implements OnInit {
       message:mensaje,
       duration:2000,
       position:'bottom',
-      color: 'danger'
+      color: 'danger',
+      cssClass: "toast-controller"
     });
     toast.present();
   }

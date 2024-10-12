@@ -54,7 +54,8 @@ export class LoginPage implements OnInit {
       message: mensaje,
       duration: 2000,
       position: 'bottom',
-      color: color
+      color: color,
+      cssClass: "toast-controller"
     });
     toast.present();
   }
