@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/helpers/services/auth.service';
 import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
@@ -11,10 +12,10 @@ export class FooterComponent  implements OnInit {
   user!: Usuario;
   esConductor!: boolean;
 
-  constructor(private navCtr: NavController) { }
+  constructor(private navCtr: NavController, private auth: AuthService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("loggedUser") || "[]");
+    this.user = this.auth.getUser()
     this.esConductor = this.user.esConductor;
     console.log(this.esConductor);
   }
