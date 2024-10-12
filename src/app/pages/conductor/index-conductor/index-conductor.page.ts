@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/helpers/services/auth.service';
 import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
@@ -9,10 +10,10 @@ import { Usuario } from 'src/app/helpers/Usuario';
 export class IndexConductorPage implements OnInit {
   user!: Usuario;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("loggedUser") || "[]")
+    this.user = this.auth.getUser()
   }
 
 }
