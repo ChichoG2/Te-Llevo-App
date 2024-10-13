@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
     private toasCtrl: ToastController
   ) { }
 
-  nuevoUsuario: any = { id: "",nombre: "", contrasena: "", esConductor: null }
+  nuevoUsuario: any = { nombre: this.nombre, contrasena: this.contrasena, esConductor: this.esConductor }
   lista: any[] = []
 
   ngOnInit() {
@@ -26,30 +26,21 @@ export class RegisterPage implements OnInit {
   }
 
   registrarBD() {
-    this.crudServ.listarItems("Usuarios").subscribe((data: any[]) => {
-      const usuario = data.find(usuario => usuario.nombre === this.nuevoUsuario.nombre)
-
-      if (!usuario) {
-        this.crudServ.crearItem("Usuarios", this.nuevoUsuario).
-          then(() => {
-            alert("Se grabo")
-          }).
-          catch((error: string) => {
-            console.error("error: " + error)
-          })
-      } else {
-        this.mostarMensaje("El nombre ya existe!, elija otro nombre.")
-      }
-    })
-
+    this.crudServ.crearItem("Usuarios", this.nuevoUsuario).
+      then(() => {
+        this.mostarMensaje("Usuario registrado!, Bienvenido", "success")
+      }).
+      catch(() => {
+        this.mostarMensaje("Ha ocurrido un error!", "danger")
+      })
   }
 
-  async mostarMensaje(mensaje:string){
+  async mostarMensaje(mensaje: string, color: string) {
     const toast = await this.toasCtrl.create({
-      message:mensaje,
-      duration:2000,
-      position:'bottom',
-      color: 'danger',
+      message: mensaje,
+      duration: 2000,
+      position: 'bottom',
+      color: color,
       cssClass: "toast-controller"
     });
     toast.present();
