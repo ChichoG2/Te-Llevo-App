@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/helpers/services/auth.service';
 import { Usuario } from 'src/app/helpers/Usuario';
 
 @Component({
@@ -9,13 +10,13 @@ import { Usuario } from 'src/app/helpers/Usuario';
 })
 export class CuentaPage implements OnInit {
 
-  constructor(private navCtrl: NavController, private alertController: AlertController) { }
-  user!: Usuario;
+  constructor(private navCtrl: NavController, private alertController: AlertController, private auth: AuthService) { }
+  user!: any;
   notificacion: boolean = false;
   esConductor!: boolean;
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("loggedUser") || "[]");
+    this.user = this.auth.getUser()
     this.esConductor = this.user.esConductor;
   }
 
