@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
     private auth: AuthService
   ) { }
 
-  usuarioDB: any = { nombre: "", contrasena: "", esConductor: null }
+  usuarioDB: any = { id: "", nombre: "", contrasena: "", esConductor: null }
 
   ngOnInit() {
     null;

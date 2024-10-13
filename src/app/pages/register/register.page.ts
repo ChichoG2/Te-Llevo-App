@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
     private toasCtrl: ToastController
   ) { }
 
-  nuevoUsuario: any = { nombre: "", contrasena: "", esConductor: null }
+  nuevoUsuario: any = { id: "",nombre: "", contrasena: "", esConductor: null }
   lista: any[] = []
 
   ngOnInit() {

@@ -8,7 +8,7 @@ import { Usuario } from 'src/app/helpers/Usuario';
   styleUrls: ['./index-conductor.page.scss'],
 })
 export class IndexConductorPage implements OnInit {
-  user!: Usuario;
+  user!: any;
 
   constructor(private auth: AuthService) { }
 

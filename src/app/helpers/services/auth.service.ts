@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedUser:any = { nombre: "", contrasena: "", esConductor: null };
+  private loggedUser:any = { id: "",nombre: "", contrasena: "", esConductor: null };
 
   constructor() { }
 
