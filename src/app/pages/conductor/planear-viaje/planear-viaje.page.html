@@ -20,9 +20,7 @@
     </ion-item>
   </div>
   <div class="flex justify-center mt-4">
-    <ion-item class="rounded">
-      <ion-input label="Hora Inicio" labelPlacement="stacked" placeholder="00:00" minlength="5" maxlength="5"></ion-input>
-    </ion-item>
+      <ion-datetime class="rounded" presentation="time" display-format="HH:mm" picker-format="HH:mm" label="Hora Inicio" labelPlacement="stacked"></ion-datetime>
   </div>
   <div class="flex justify-center">
     <ion-button expand="block" class="mt-8" (click)="confirmar()">
