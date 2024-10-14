@@ -40,7 +40,9 @@ export class LoginPage implements OnInit {
           }, 2000);
         } else {
           this.mostarMensaje("Bienvenido Pasajero!", "success")
-          this.navCtrl.navigateForward(["/index"])
+          setTimeout(() => {
+            this.navCtrl.navigateForward(["/index"]);
+          }, 2000);
         }
       } else {
         this.mostarMensaje("Credenciales incorrectas!", "danger")
