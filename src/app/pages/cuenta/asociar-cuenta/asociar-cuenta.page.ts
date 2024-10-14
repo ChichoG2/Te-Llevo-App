@@ -38,30 +38,30 @@ export class AsociarCuentaPage implements OnInit {
       if (!tarjetaExist) {
         this.crudServ.crearItem("TarjetaAsociada", this.cuentaAsociada)
           .then(() => {
-            this.mostarMensaje("Cuenta asociada correctamente!", "success");
+            this.mostrarMensaje("Cuenta asociada correctamente!", "success");
             this.navCtrl.navigateForward(["/cuenta"]);
           })
           .catch(() => {
-            this.mostarMensaje("Ha ocurrido un error!", "danger");
+            this.mostrarMensaje("Ha ocurrido un error!", "danger");
           });
       } else {
         this.crudServ.modificar("TarjetaAsociada", tarjetaExist.id, this.cuentaAsociada)
           .then(() => {
-            this.mostarMensaje("Tarjeta modificada correctamente!", "success");
+            this.mostrarMensaje("Tarjeta modificada correctamente!", "success");
             this.navCtrl.navigateForward(["/cuenta"])
           })
           .catch(() => {
-            this.mostarMensaje("Ha ocurrido un error, vuelva a intentarlo!", "danger");
+            this.mostrarMensaje("Ha ocurrido un error, vuelva a intentarlo!", "danger");
           });
       }
     });
   }
 
-  async mostarMensaje(mensaje: string, color: string) {
+  async mostrarMensaje(mensaje: string, color: string) {
     const toast = await this.toastCtrl.create({
       message: mensaje,
       duration: 2000,
-      position: 'bottom',
+      position: 'top',
       color: color,
       cssClass: "toast-controller"
     });

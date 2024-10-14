@@ -28,18 +28,18 @@ export class RegisterPage implements OnInit {
   registrarBD() {
     this.crudServ.crearItem("Usuarios", this.nuevoUsuario).
       then(() => {
-        this.mostarMensaje("Usuario registrado!, Bienvenido", "success")
+        this.mostrarMensaje("Usuario registrado!, Bienvenido", "success")
       }).
       catch(() => {
-        this.mostarMensaje("Ha ocurrido un error!", "danger")
+        this.mostrarMensaje("Ha ocurrido un error!", "danger")
       })
   }
 
-  async mostarMensaje(mensaje: string, color: string) {
+  async mostrarMensaje(mensaje: string, color: string) {
     const toast = await this.toasCtrl.create({
       message: mensaje,
       duration: 2000,
-      position: 'bottom',
+      position: 'top',
       color: color,
       cssClass: "toast-controller"
     });

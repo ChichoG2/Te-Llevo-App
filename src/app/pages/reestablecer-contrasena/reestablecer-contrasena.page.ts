@@ -30,24 +30,24 @@ export class ReestablecerContrasenaPage implements OnInit {
       if (userExist) {
         this.userBD = { id: userExist.id, nombre: userExist.nombre, contrasena: this.contrasena, esConductor: userExist.esConductor }
         this.crudServ.modificar("Usuarios", userExist.id, this.userBD).then(() => {
-          this.mostarMensaje("Contrasena cambiada correctamente!", "success")
+          this.mostrarMensaje("Contrasena cambiada correctamente!", "success")
           setTimeout(() => {
             this.navCtrl.navigateForward(["/login"])
           }, 1000);
         }).catch((error) => {
-          this.mostarMensaje(`Algo salio mal! ${error}`, "danger")
+          this.mostrarMensaje(`Algo salio mal! ${error}`, "danger")
         })
       } else {
-        this.mostarMensaje("El usuario no existe!", "danger")
+        this.mostrarMensaje("El usuario no existe!", "danger")
       }
     })
   }
 
-  async mostarMensaje(mensaje: string, color: string) {
+  async mostrarMensaje(mensaje: string, color: string) {
     const toast = await this.toastCtrl.create({
       message: mensaje,
       duration: 2000,
-      position: 'bottom',
+      position: 'top',
       color: color,
       cssClass: "toast-controller"
     });

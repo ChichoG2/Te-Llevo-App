@@ -34,28 +34,28 @@ export class LoginPage implements OnInit {
       if (userExist) {
         this.auth.setUser(userExist);
         if (userExist.esConductor) {
-          this.mostarMensaje("Bienvenido Conductor!", "success")
+          this.mostrarMensaje("Bienvenido Conductor!", "success")
           setTimeout(() => {
             this.navCtrl.navigateForward(["/index-conductor"])
           }, 2000);
         } else {
-          this.mostarMensaje("Bienvenido Pasajero!", "success")
+          this.mostrarMensaje("Bienvenido Pasajero!", "success")
           setTimeout(() => {
             this.navCtrl.navigateForward(["/index"]);
           }, 2000);
         }
       } else {
-        this.mostarMensaje("Credenciales incorrectas!", "danger")
+        this.mostrarMensaje("Credenciales incorrectas!", "danger")
       }
 
     })
   }
 
-  async mostarMensaje(mensaje: string, color: string) {
+  async mostrarMensaje(mensaje: string, color: string) {
     const toast = await this.toastCtrl.create({
       message: mensaje,
       duration: 2000,
-      position: 'bottom',
+      position: 'top',
       color: color,
       cssClass: "toast-controller"
     });
