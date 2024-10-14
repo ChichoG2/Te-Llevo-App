@@ -7,8 +7,30 @@ ion-button{
 }
 
 @media (max-width:320px){
-    span{
-        font-size: 12px;
+    .viaje-info{
+        font-size: 10.5px;
+    }
+    ion-button{
+        width: 60px;
+        p{
+            font-size: 10px;
+        }
+    }
+}
+@media (max-width: 375px){
+    .viaje-info{
+        font-size: 10.5px;
+    }
+    ion-button{
+        width: 60px;
+        p{
+            font-size: 10px;
+        }
+    }
+}
+@media (max-width: 425px){
+    .viaje-info{
+        font-size: 10.5px;
     }
     ion-button{
         width: 60px;

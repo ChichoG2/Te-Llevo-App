@@ -6,13 +6,13 @@
             <ion-card class="">
                 <ion-card-content class="">
                     <ion-list>
-                        <ion-card-title class="mt-2">
+                        <ion-card-title class="mt-2 text-lg">
                             TUS VIAJES PROGRAMADOS
                         </ion-card-title>
-                        <ion-item *ngFor="let item of listadoItems">
-                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="p-1">Hora: {{ item.formattedHour }}</span>
-                            <span class="p-1"><strong>Destino:</strong> {{ item.destino.length > 15 ? (item.destino | slice:0:20) + '...' : item.destino }}</span>
+                        <ion-item class="mt-1" *ngFor="let item of listadoItems">
+                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="45">
+                            <span class="p-1 viaje-info">Hora: {{ item.formattedHour }}</span>
+                            <span class="p-1 viaje-info">Hacia: {{ item.destino.length > 15 ? (item.destino | slice:0:20) + '...' : item.destino }}</span>
                             <div class="ml-auto">
                                 <ion-button routerLink="/iniciar-viaje">
                                   <p>Detalles</p>

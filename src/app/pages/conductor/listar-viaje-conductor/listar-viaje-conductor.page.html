@@ -5,10 +5,10 @@
   <div class="flex justify-center mt-10" *ngFor="let item of listadoItems">
     <ion-item>
       <img src="assets/img/auto.png" height="26" width="45" />
-      <h2 class="p-3"><strong>Destino:</strong> {{ item.destino.length > 15 ? (item.destino | slice:0:20) + '...' : item.destino }}</h2>
+      <h2 class="p-3 destino">Hacia: {{ item.destino.length > 15 ? (item.destino | slice:0:15) + '...' : item.destino }}</h2>
       <div class="ml-auto">
-        <ion-button color="primary" routerLink="/iniciar-viaje">Detalles</ion-button>
-        <ion-button color="danger" routerLink="/index-conductor">Cancelar</ion-button>
+        <ion-button class="primary-button" routerLink="/iniciar-viaje">Detalles</ion-button>
+        <ion-button class="danger-button" routerLink="/index-conductor">Cancelar</ion-button>
       </div>
     </ion-item>
   </div>
