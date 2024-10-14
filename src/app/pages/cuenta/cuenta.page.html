@@ -31,7 +31,9 @@
           class="bg-white text-black text-center" 
           type="text" 
           maxlength="12"
-          placeholder="*** *** *** ***">
+          [value]="numeroCuenta ? numeroCuenta.numCuenta : ''" 
+          placeholder="*** *** *** ***" 
+          [readonly]="true"> 
         </ion-input>
       </ion-item>
     </div>
@@ -45,11 +47,12 @@
       <h2 class="sm:text-lg md:text-lg sm:mb-0">Patente Asociada:</h2>
       <ion-item class="rounded-lg">
         <ion-input 
-          class="bg-white text-black text-center" 
-          type="text" 
-          maxlength="12"
-          placeholder="AA-BB-99">
-        </ion-input>
+        class="bg-white text-black text-center" 
+        type="text" 
+        maxlength="12"
+        [value]="autoConductor?.patente || 'AA-BB-99'" 
+        readonly>
+      </ion-input>
       </ion-item>
     </div>
     <hr class="mt-4 border-[#1b1b1e]">
