@@ -9,27 +9,10 @@
                         <ion-card-title class="mt-2">
                             TUS VIAJES PROGRAMADOS
                         </ion-card-title>
-                        <ion-item>
+                        <ion-item *ngFor="let item of listadoItems">
                             <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="p-1">hora: 00:00</span><span class="p-1">destino:[Direccion]</span>
-                            <div class="ml-auto">
-                                <ion-button routerLink="/iniciar-viaje">
-                                  <p>Detalles</p>
-                                </ion-button>
-                            </div>
-                        </ion-item>
-                        <ion-item>
-                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="p-1">hora: 00:00</span><span class="p-1">destino:[Direccion]</span>
-                            <div class="ml-auto">
-                                <ion-button routerLink="/iniciar-viaje">
-                                  <p>Detalles</p>
-                                </ion-button>
-                            </div>
-                        </ion-item>
-                        <ion-item>
-                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="p-1">hora: 00:00</span><span class="p-1">destino:[Direccion]</span>
+                            <span class="p-1">Hora: {{ item.formattedHour }}</span>
+                            <span class="p-1"><strong>Destino:</strong> {{ item.destino.length > 15 ? (item.destino | slice:0:20) + '...' : item.destino }}</span>
                             <div class="ml-auto">
                                 <ion-button routerLink="/iniciar-viaje">
                                   <p>Detalles</p>
