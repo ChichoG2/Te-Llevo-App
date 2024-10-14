@@ -2,11 +2,11 @@
 
 <ion-content [fullscreen]="true">
   <div class="flex justify-center">
-    <img class="rounded" src="assets/img/MapLive.png" alt="" />
+    <div id="map" style="height: 400px; width: 100%;"></div>
   </div>
   <div class="flex justify-center gap-4">
     <ion-button expand="block" class="mt-8">
-      <p>Distancia: 1000M</p>
+      <p>Distancia: {{ distancia | number: '1.0-0' }}M</p>
     </ion-button>
     <ion-button expand="block" class="mt-8">
       <p class="text-xs">Enviar notificación de llegada</p>
