@@ -17,7 +17,6 @@ export class FooterComponent  implements OnInit {
   ngOnInit() {
     this.user = this.auth.getUser()
     this.esConductor = this.user.esConductor;
-    console.log(this.esConductor);
   }
 
   cuenta(){
