@@ -7,8 +7,8 @@
       <img src="assets/img/auto.png" height="26" width="45" />
       <h2 class="p-3 destino">Hacia: {{ item.destino.length > 15 ? (item.destino | slice:0:15) + '...' : item.destino }}</h2>
       <div class="ml-auto">
-        <ion-button class="primary-button" routerLink="/iniciar-viaje">Detalles</ion-button>
-        <ion-button class="danger-button" routerLink="/index-conductor">Cancelar</ion-button>
+        <ion-button class="primary-button" [routerLink]="['/viaje-vivo', item.id]">Detalles</ion-button>
+        <ion-button class="danger-button" (click)="eliminar(item.id)">Cancelar</ion-button>
       </div>
     </ion-item>
   </div>

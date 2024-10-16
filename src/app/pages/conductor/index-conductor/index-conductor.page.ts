@@ -25,7 +25,7 @@ export class IndexConductorPage implements OnInit {
     const userId = this.auth.getUser().id;
     this.crudServ.listarItems("Viajes").subscribe((data: any[]) => {
       const filtrarViajes = data.filter(viaje => 
-        viaje.conductor && viaje.conductor.id === userId
+        viaje.conductor && viaje.conductor === userId
       );
       // Mapeo los viajes para formatear la hora
       this.listadoItems = filtrarViajes.map(viaje => {
