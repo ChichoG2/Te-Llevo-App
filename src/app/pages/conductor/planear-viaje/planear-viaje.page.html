@@ -3,11 +3,11 @@
 <ion-content [fullscreen]="true">
   <h1 class="text-center mt-4 font-bold">Programar Viaje</h1>
   <div class="flex justify-center mt-4">
-    <ion-searchbar animated="true" placeholder="Seleccione destino..." maxlength="80"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="destino" (ionInput)="buscarCoordenadas($event)" animated="true" placeholder="Seleccione destino..." maxlength="80"></ion-searchbar>
   </div>
   <div class="flex justify-center mt-4">
     <ion-item class="rounded w-52">
-      <ion-select label="Capacidad Auto:">
+      <ion-select label="Capacidad Auto:" [(ngModel)]="capacidadAuto">
         <ion-select-option value="2">2</ion-select-option>
         <ion-select-option value="3">3</ion-select-option>
         <ion-select-option value="4">4</ion-select-option>
@@ -16,11 +16,11 @@
   </div>
   <div class="flex justify-center mt-4">
     <ion-item class="rounded">
-      <ion-input label="Precio" labelPlacement="stacked" placeholder="$" minlength="3" maxlength="4"></ion-input>
+      <ion-input label="Precio" labelPlacement="stacked" placeholder="$" [(ngModel)]="precio" minlength="3" maxlength="4"></ion-input>
     </ion-item>
   </div>
   <div class="flex justify-center mt-4">
-      <ion-datetime class="rounded" presentation="time" display-format="HH:mm" picker-format="HH:mm" label="Hora Inicio" labelPlacement="stacked"></ion-datetime>
+    <ion-datetime class="rounded" presentation="time" display-format="HH:mm" picker-format="HH:mm" label="Hora Inicio" labelPlacement="stacked" [(ngModel)]="hora"></ion-datetime>
   </div>
   <div class="flex justify-center">
     <ion-button expand="block" class="mt-8" (click)="confirmar()">

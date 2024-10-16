@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Usuario } from 'src/app/helpers/Usuario';
+import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 import { CrudFirebaseService } from 'src/app/helpers/services/crud-firebase.service';
 import { AuthService } from 'src/app/helpers/services/auth.service';
@@ -16,20 +16,28 @@ export class ViajeVivoPage implements OnInit {
   startLatLng!: { lat: number, lng: number };
   endLatLng!: { lat: number, lng: number };
   distancia: number = 0;
+  viajeId!: string;
 
   constructor(
     private navCtrl: NavController,
     private crudServ: CrudFirebaseService,
-    private auth: AuthService
-  ) { }
+    private auth: AuthService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     // Obtener el usuario logueado
     this.user = this.auth.getUser();
+    this.viajeId = this.route.snapshot.paramMap.get('id') || '';
 
     // Filtrar y cargar el viaje del conductor
+    this.cargarDatosViaje(this.viajeId);
+  }
+
+  cargarDatosViaje(viajeId: string) {
     this.crudServ.listarItems("Viajes").subscribe((data: any[]) => {
-      const viajeConductor = data.find(viaje => viaje.conductor.id === this.user.id);
+      // Busca el viaje por ID del documento y que el conductor sea el usuario logueado
+      const viajeConductor = data.find(viaje => viaje.id === viajeId && viaje.conductor === this.user.id);
 
       if (viajeConductor) {
         console.log('Viaje encontrado:', viajeConductor); // Debug para verificar los datos del viaje
@@ -120,5 +128,4 @@ export class ViajeVivoPage implements OnInit {
 
     return R * c; // Distancia en metros
   }
-
 }

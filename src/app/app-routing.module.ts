@@ -52,7 +52,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/conductor/confirmar-viaje/confirmar-viaje.module').then( m => m.ConfirmarViajePageModule)
   },
   {
-    path: 'viaje-vivo',
+    path: 'viaje-vivo/:id',
     canActivate:[conductorGuard,loginGuard],
     loadChildren: () => import('./pages/conductor/viaje-vivo/viaje-vivo.module').then( m => m.ViajeVivoPageModule)
   },
