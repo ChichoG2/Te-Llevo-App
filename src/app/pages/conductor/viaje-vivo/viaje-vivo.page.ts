@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
+import 'leaflet-routing-machine'
 import { CrudFirebaseService } from 'src/app/helpers/services/crud-firebase.service';
 import { AuthService } from 'src/app/helpers/services/auth.service';
 
@@ -23,7 +24,7 @@ export class ViajeVivoPage implements OnInit {
     private crudServ: CrudFirebaseService,
     private auth: AuthService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     // Obtener el usuario logueado
@@ -97,13 +98,16 @@ export class ViajeVivoPage implements OnInit {
       .addTo(this.map)
       .bindPopup('Destino Final');
 
-    // Trazar una línea entre los puntos de inicio y destino
-    const route: L.LatLngTuple[] = [
-      [this.startLatLng.lat, this.startLatLng.lng],
-      [this.endLatLng.lat, this.endLatLng.lng]
-    ];
-
-    L.polyline(route, { color: 'blue' }).addTo(this.map);
+    // Añadir control de enrutamiento
+    setTimeout(() => {
+      L.Routing.control({
+        waypoints: [
+          L.latLng(this.startLatLng.lat, this.startLatLng.lng),
+          L.latLng(this.endLatLng.lat, this.endLatLng.lng)
+        ],
+        routeWhileDragging: true
+      }).addTo(this.map);
+    }, 100);
   }
 
   index() {
@@ -127,5 +131,12 @@ export class ViajeVivoPage implements OnInit {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     return R * c; // Distancia en metros
+  }
+  
+  ocultarIndicaciones() {
+    const routingContainer = document.querySelector('.leaflet-routing-container');
+    if (routingContainer) {
+      routingContainer.classList.toggle('hidden'); // Añade o quita la clase 'hidden'
+    }
   }
 }
