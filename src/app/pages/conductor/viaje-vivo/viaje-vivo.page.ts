@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine'
@@ -23,53 +23,65 @@ export class ViajeVivoPage implements OnInit {
     private navCtrl: NavController,
     private crudServ: CrudFirebaseService,
     private auth: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loadingController: LoadingController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     // Obtener el usuario logueado
     this.user = this.auth.getUser();
     this.viajeId = this.route.snapshot.paramMap.get('id') || '';
 
+    const loading = await this.loadingController.create({
+      message: 'Cargando mapa...',
+      duration: 8000
+    });
+    await loading.present();
+
     // Filtrar y cargar el viaje del conductor
-    this.cargarDatosViaje(this.viajeId);
+    this.cargarDatosViaje(this.viajeId).then(() => {
+      loading.dismiss();
+    });
   }
 
-  cargarDatosViaje(viajeId: string) {
-    this.crudServ.listarItems("Viajes").subscribe((data: any[]) => {
-      // Busca el viaje por ID del documento y que el conductor sea el usuario logueado
-      const viajeConductor = data.find(viaje => viaje.id === viajeId && viaje.conductor === this.user.id);
+  cargarDatosViaje(viajeId: string): Promise<void> {
+    return new Promise((resolve) => {
+      this.crudServ.listarItems("Viajes").subscribe((data: any[]) => {
+        // Busca el viaje por ID del documento y que el conductor sea el usuario logueado
+        const viajeConductor = data.find(viaje => viaje.id === viajeId && viaje.conductor === this.user.id);
 
-      if (viajeConductor) {
-        console.log('Viaje encontrado:', viajeConductor); // Debug para verificar los datos del viaje
+        if (viajeConductor) {
+          console.log('Viaje encontrado:', viajeConductor); // Debug para verificar los datos del viaje
 
-        // Verificar que destinoInicio y destinoFinal tengan lat y lng
-        if (
-          viajeConductor.destinoInicio &&
-          viajeConductor.destinoInicio.latitude !== undefined &&
-          viajeConductor.destinoInicio.longitude !== undefined &&
-          viajeConductor.destinoFinal &&
-          viajeConductor.destinoFinal.latitude !== undefined &&
-          viajeConductor.destinoFinal.longitude !== undefined
-        ) {
-          // Asignar las coordenadas correctamente
-          this.startLatLng = {
-            lat: viajeConductor.destinoInicio.latitude,
-            lng: viajeConductor.destinoInicio.longitude
-          };
-          this.endLatLng = {
-            lat: viajeConductor.destinoFinal.latitude,
-            lng: viajeConductor.destinoFinal.longitude
-          };
-          const distanciaCalculada = this.calcularDistancia(this.startLatLng, this.endLatLng);
-          this.distancia = distanciaCalculada;
-          this.loadMap();
+          // Verificar que destinoInicio y destinoFinal tengan lat y lng
+          if (
+            viajeConductor.destinoInicio &&
+            viajeConductor.destinoInicio.latitude !== undefined &&
+            viajeConductor.destinoInicio.longitude !== undefined &&
+            viajeConductor.destinoFinal &&
+            viajeConductor.destinoFinal.latitude !== undefined &&
+            viajeConductor.destinoFinal.longitude !== undefined
+          ) {
+            // Asignar las coordenadas correctamente
+            this.startLatLng = {
+              lat: viajeConductor.destinoInicio.latitude,
+              lng: viajeConductor.destinoInicio.longitude
+            };
+            this.endLatLng = {
+              lat: viajeConductor.destinoFinal.latitude,
+              lng: viajeConductor.destinoFinal.longitude
+            };
+            const distanciaCalculada = this.calcularDistancia(this.startLatLng, this.endLatLng);
+            this.distancia = distanciaCalculada;
+            this.loadMap();
+          } else {
+            console.error('Coordenadas de destinoInicio o destinoFinal no válidas');
+          }
         } else {
-          console.error('Coordenadas de destinoInicio o destinoFinal no válidas');
+          console.log('No se encontró un viaje para el conductor logueado');
         }
-      } else {
-        console.log('No se encontró un viaje para el conductor logueado');
-      }
+        resolve();
+      });
     });
   }
 
@@ -132,7 +144,7 @@ export class ViajeVivoPage implements OnInit {
 
     return R * c; // Distancia en metros
   }
-  
+
   ocultarIndicaciones() {
     const routingContainer = document.querySelector('.leaflet-routing-container');
     if (routingContainer) {
