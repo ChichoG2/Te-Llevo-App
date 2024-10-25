@@ -28,7 +28,7 @@
       <h2 class="sm:text-lg md:text-lg sm:mb-0">Cuenta Asociada:</h2>
       <ion-item class="rounded-lg">
         <ion-input 
-          class="bg-white text-black text-center" 
+          class="bg-transparent text-white text-center" 
           type="text" 
           maxlength="12"
           [value]="numeroCuenta ? numeroCuenta.numCuenta : ''" 
@@ -47,18 +47,19 @@
       <h2 class="sm:text-lg md:text-lg sm:mb-0">Patente Asociada:</h2>
       <ion-item class="rounded-lg">
         <ion-input 
-        class="bg-white text-black text-center" 
+        class="bg-transparent text-white text-center" 
         type="text" 
         maxlength="12"
-        [value]="autoConductor?.patente || 'AA-BB-99'" 
+        [value]="autoConductor?.patente || 'AABB99'" 
         readonly>
       </ion-input>
-      </ion-item>
+      </ion-item> 
     </div>
     <hr class="mt-4 border-[#1b1b1e]">
     <div class="flex flex-row items-center justify-between mx-4 mt-6 sm:mx-20">
       <h2 class="sm:text-lg md:text-lg sm:mb-0">Conductor:</h2>
-      <mat-slide-toggle class="scale-110" labelPosition="before" [(ngModel)]="esConductor" (change)="onToggleChange()"></mat-slide-toggle>
+      <!-- <mat-slide-toggle class="scale-110" labelPosition="before" [(ngModel)]="esConductor" (change)="onToggleChange()"></mat-slide-toggle> -->
+      <mat-slide-toggle class="scale-110" labelPosition="before" [(ngModel)]="esConductor" [disabled]="true"></mat-slide-toggle>
     </div>
     <hr class="mt-4 border-[#1b1b1e]">
   </section>

@@ -30,7 +30,7 @@ export class CuentaPage implements OnInit {
       this.numeroCuenta = cuenta ? cuenta : null;
     })
     this.crudServ.listarItems("Autos").subscribe(data => {
-      const auto = data.find(auto => auto.usuario.id === this.user.id);
+      const auto = data.find(auto => auto.usuario === this.user.id);
       this.autoConductor = auto ? auto : null;
     });
   }
