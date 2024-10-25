@@ -87,7 +87,7 @@ export class PlanearViajePage implements OnInit {
     let autoUsuario: any;
 
     this.crudServ.listarItems('Autos').subscribe((autos) => {
-      autoUsuario = autos.find(auto => auto.usuario.id === usuarioLogueado.id);
+      autoUsuario = autos.find(auto => auto.usuario === usuarioLogueado.id);
 
       if (!autoUsuario) {
         console.error('No se encontró el auto del conductor para el usuario:', usuarioLogueado.id);
