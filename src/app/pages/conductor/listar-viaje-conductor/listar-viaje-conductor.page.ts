@@ -32,15 +32,17 @@ export class ListarViajeConductorPage implements OnInit {
   }
 
   eliminar(id:any){
-    this.crudServ.eliminar("Viajes",id).then(()=>{
-      setTimeout(() => {
-        this.mostrarMensaje("Se elimino correctamente!", "success")
-      }, 1000);
-    }).catch(() => {
-      setTimeout(() => {
-        this.mostrarMensaje("Ha ocurrido un error!","danger")
-      }, 1000);
-    })
+    setTimeout(() => {
+      this.crudServ.eliminar("Viajes",id).then(()=>{
+        setTimeout(() => {
+          this.mostrarMensaje("Se elimino correctamente!", "success")
+        }, 500);
+      }).catch(() => {
+        setTimeout(() => {
+          this.mostrarMensaje("Ha ocurrido un error!","danger")
+        }, 500);
+      })
+    }, 1500);
   }
 
   async mostrarMensaje(mensaje: string, color: string) {
