@@ -10,6 +10,7 @@ import { Usuario } from 'src/app/helpers/Usuario';
 })
 export class RegisterPage implements OnInit {
   nombre!: string;
+  patente!: string;
   contrasena!: string;
   esConductor: boolean = false;
 
@@ -19,6 +20,7 @@ export class RegisterPage implements OnInit {
   ) { }
 
   nuevoUsuario: any = { nombre: this.nombre, contrasena: this.contrasena, esConductor: this.esConductor }
+  auto: any = { patente: this.patente, usuario: '' }
   lista: any[] = []
 
   ngOnInit() {
@@ -26,13 +28,48 @@ export class RegisterPage implements OnInit {
   }
 
   registrarBD() {
-    this.crudServ.crearItem("Usuarios", this.nuevoUsuario).
-      then(() => {
-        this.mostrarMensaje("Usuario registrado!, Bienvenido", "success")
-      }).
-      catch(() => {
-        this.mostrarMensaje("Ha ocurrido un error!", "danger")
+    this.crudServ.crearItem("Usuarios", this.nuevoUsuario)
+      .then(() => {
+        this.mostrarMensaje("Usuario registrado!, Bienvenido", "success");
+
+        // Llamar a listar() y obtener el ID del usuario
+        this.listar((usuarioId: string) => {
+          // Si el usuario es conductor, asignar un auto
+          if (this.nuevoUsuario.esConductor && usuarioId) {
+            this.auto = { patente: this.patente, usuario: usuarioId };
+            this.crudServ.crearItem("Autos", this.auto)
+              .then(() => {
+                this.mostrarMensaje("Auto asignado correctamente!", "success");
+              })
+              .catch(() => {
+                this.mostrarMensaje("Error al asignar auto!", "danger");
+              });
+          } else if (this.nuevoUsuario.esConductor) {
+            this.mostrarMensaje("Error: No se pudo encontrar el usuario para asignar el auto.", "danger");
+          }
+
+        this.navCtr.navigateForward(["/login"])
+        });
       })
+      .catch(() => {
+        this.mostrarMensaje("Ha ocurrido un error al registrar el usuario!", "danger");
+      });
+  }
+
+  //función listar para que acepte un callback
+  listar(callback: (usuarioId: string) => void) {
+    this.crudServ.listarItems("Usuarios").subscribe((data: any[]) => {
+      const usuario = data.find(user => user.nombre === this.nuevoUsuario.nombre && user.contrasena === this.nuevoUsuario.contrasena);
+      if (usuario) {
+        callback(usuario.id); 
+      } else {
+        console.log("Usuario no encontrado");
+        callback('');
+      }
+    }, error => {
+      console.error("Error al listar usuarios:", error);
+      callback('');
+    });
   }
 
   async mostrarMensaje(mensaje: string, color: string) {

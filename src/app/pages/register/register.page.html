@@ -19,6 +19,18 @@
           <mat-slide-toggle labelPosition="before" [(ngModel)]="nuevoUsuario.esConductor"></mat-slide-toggle>
         </p>
       </div>
+      <div class="mt-6" *ngIf="nuevoUsuario.esConductor">
+        <ion-input [(ngModel)]="patente" 
+                  (ngModelChange)="patente = $event.toUpperCase()"
+                   label="Patente del auto" 
+                   label-placement="floating" 
+                   fill="outline" 
+                   placeholder="Ingrese Patente" 
+                   pattern="[A-Z]{4}[0-9]{2}" 
+                   maxlength="6"
+                   required>
+        </ion-input>
+      </div>
       <div class="mt-3 ml-1">
         <a routerLink="/login" class="font-semibold">Tienes cuenta?.. Inicia sesión Aquí!</a>
       </div>
