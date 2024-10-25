@@ -14,7 +14,7 @@ export class PlanearViajePage implements OnInit {
   destino: string = '';
   capacidadAuto!: number;
   precio!: number;
-  hora!: string; // Hora que viene de ion-datetime en formato HH:mm
+  hora!: string;
   horaSeleccionada!: Timestamp;
   coordenadasDestino!: { lat: number, lng: number };
   user!: any;
@@ -28,7 +28,7 @@ export class PlanearViajePage implements OnInit {
   ) { }
 
   onHoraChange() {
-    const fechaActual = new Date(); // Obtenemos la fecha actual
+    const fechaActual = new Date();
     const partesHora = this.hora.split(':'); // Dividimos la hora en horas y minutos
 
     // Crear una nueva fecha con la hora seleccionada (y los minutos)
@@ -49,10 +49,10 @@ export class PlanearViajePage implements OnInit {
 
     // Establecer la hora actual por defecto en formato HH:mm
     const fechaActual = new Date();
-    this.hora = fechaActual.toTimeString().substring(0, 5); // Formato HH:mm
+    this.hora = fechaActual.toTimeString().substring(0, 5);
     console.log('Hora actual inicial:', this.hora);
 
-    this.onHoraChange(); // Inicializa horaSeleccionada con la hora actual
+    this.onHoraChange();
   }
 
   buscarCoordenadas(event: any) {
@@ -79,7 +79,6 @@ export class PlanearViajePage implements OnInit {
   confirmar() {
     const usuarioLogueado = this.auth.getUser();
 
-    // Verificar si el usuario logueado existe
     if (!usuarioLogueado || !usuarioLogueado.id) {
       console.error('Usuario no está logueado');
       return;
@@ -87,11 +86,9 @@ export class PlanearViajePage implements OnInit {
 
     let autoUsuario: any;
 
-    // Obtener el auto del usuario logueado
     this.crudServ.listarItems('Autos').subscribe((autos) => {
       autoUsuario = autos.find(auto => auto.usuario.id === usuarioLogueado.id);
 
-      // Verificar si se encontró el auto
       if (!autoUsuario) {
         console.error('No se encontró el auto del conductor para el usuario:', usuarioLogueado.id);
         return;
@@ -100,7 +97,6 @@ export class PlanearViajePage implements OnInit {
       this.crudServ.listarItems("Usuarios").subscribe((usuarios) => {
         const conductor = usuarios.find(user => user.id === usuarioLogueado.id);
 
-        // Verificar si se encontró el conductor
         if (!conductor) {
           console.error('No se encontró el conductor con ID:', usuarioLogueado.id);
           return;
@@ -108,7 +104,6 @@ export class PlanearViajePage implements OnInit {
 
         console.log('Conductor ID:', conductor.id, 'Auto ID:', autoUsuario.id);
 
-        // Asegura de que horaSeleccionada no sea undefined
         if (!this.horaSeleccionada) {
           console.error('Hora seleccionada es undefined, estableciendo hora actual');
           this.horaSeleccionada = Timestamp.now(); // Usa la hora actual si es undefined
