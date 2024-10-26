@@ -9,35 +9,18 @@
                         <ion-card-title class="mt-2">
                             VIAJES PROGRAMADOS
                         </ion-card-title>
-                        <ion-item>
+                        <ion-item class="mt-1" *ngFor="let item of listadoItems">
+                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="45">
+                            <span class="p-1 viaje-info">Hora: {{ item.formattedHour }}</span>
+                            <span class="p-1 viaje-info">Hacia: {{ item.destino.length > 15 ? (item.destino | slice:0:20) + '...' : item.destino }}</span>
+                            <div class="ml-auto">
+                                <ion-button [routerLink]="['/viaje-vivo', item.id]">
+                                  <p>Detalles</p>
+                                </ion-button>
+                            </div>
                         </ion-item>
-                        <ion-item>
-                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
-                        </ion-item>
-                        <ion-item>
-                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino:[Direccion]</span>
-                        </ion-item>
-                        <ion-item>
-                            <img src="assets/img/auto.png" alt="AutoMini" height="50" width="50">
-                            <span class="mx-5">hora: 00:00</span><span class="mx-5">destino: [Direccion]</span>
-                        </ion-item>
-
                     </ion-list>
                 </ion-card-content>    
-            </ion-card>
-        </div>
-
-        <ion-title class="font-bold text-xl text-center m-6">Ultimas Notificaciones</ion-title>
-
-        <div class="flex justify-center text-left">
-            <ion-card class="rounded-3xl bg-white w-9/12 h-16">
-                <ion-card-header>
-                <ion-card-title class="-mt-2"><span class="text-neutral-950 text-base">Notificacion por defecto</span></ion-card-title>
-                <ion-card-subtitle>Texto de notificacion por defecto</ion-card-subtitle>
-                </ion-card-header>
-
             </ion-card>
         </div>
 </ion-content>

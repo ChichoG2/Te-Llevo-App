@@ -1,63 +1,43 @@
 <app-header />
 
 <ion-content [fullscreen]="true">    
-    <ion-title class="font-bold text-2xl text-center m-8 mt-16">Buscando Viaje...</ion-title>
-    <div class="flex justify-center">
-      <img src="assets/img/mapa.png" alt="User Icon" class="">
-    </div>
-    <div class="flex justify-center mt-6">
-    <ion-list class="justify-center min-w-64">
-      <ion-item>
-        <ion-select
-          label="Conductor"
-          interface="action-sheet"
-          placeholder="Conductores"
-          cancelText="Cancelar"
-        >
-          <ion-select-option value="Kitty $5000">Kitty $5000</ion-select-option>
-          <ion-select-option value="Kitty $6000">Kitty $6000</ion-select-option>
-          <ion-select-option value="Kitty $7000">Kitty $7000</ion-select-option>
-        </ion-select>
+  <ion-title class="font-bold text-2xl text-center m-8 mt-16">Selecciona un viaje</ion-title>
+
+  <div class="flex justify-center mt-6">
+    <ion-list>
+      <ion-item class="mt-1" *ngFor="let item of listadoItems; let index" (click)="onItemSelect(item)">
+        <img src="assets/img/auto.png" alt="AutoMini" height="50" width="45">
+        <span class="p-1 viaje-info">Hora: {{ item.formattedHour }}</span>
+        <span class="p-1 viaje-info">
+          Hacia: {{ item.destino.length > 15 ? (item.destino | slice:0:20) + '...' : item.destino }}
+        </span>
       </ion-item>
     </ion-list>
+  </div>
 
-    </div>
+  <!-- Infinite Scroll al final de la lista -->
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)" [disabled]="!hasMoreItems">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más viajes..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
-    <div class="flex justify-center mt-6 mb-6">
- 
-      <ion-button id="open-modal" expand="block"><p>Iniciar viaje</p></ion-button>
-      
-      <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
-        <ng-template>
-          <div>
-
-            <div class="flex justify-center mt-16 flex-row">
-              <ion-list class="justify-center min-w-64">
-                <ion-item>
-                  <ion-select
-                    label="Metodo"
-                    interface="action-sheet"
-                    placeholder="Pago"
-                    cancelText="Cancelar"
-                  >
-                    <ion-select-option value="Debito">Debito</ion-select-option>
-                    <ion-select-option value="Credito">Credito</ion-select-option>
-                    <ion-select-option value="Efectivo">Efectivo</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-list>
-          
-            </div>
-            <div class="flex flex-row justify-center mt-6 mb-20">
-              <ion-button (click)="index('top')"><p>Confirmar</p></ion-button>
-            </div>
-          </div>
-        </ng-template>
-      </ion-modal>
-    </div>
-    
+  <!-- Modal de Selección de Método de Pago -->
+  <ion-modal #paymentModal [initialBreakpoint]="1" [breakpoints]="[0, 1]" [isOpen]="isPaymentModalOpen">
+    <ng-template>
+      <div class="flex justify-center mt-16 flex-row">
+        <ion-list class="justify-center min-w-64">
+          <ion-item>
+            <ion-select label="Metodo" interface="action-sheet" placeholder="Pago" cancelText="Cancelar">
+              <ion-select-option value="Efectivo">Efectivo</ion-select-option>
+              <ion-select-option value="Transferencia">Transferencia</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="flex flex-row justify-center mt-6 mb-20">
+        <ion-button (click)="confirmPayment()"><p>Confirmar</p></ion-button>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>
-
-
 
 <app-footer />
