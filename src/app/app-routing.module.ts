@@ -53,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: 'viaje-vivo/:id',
-    canActivate:[conductorGuard,loginGuard],
+    canActivate:[loginGuard],
     loadChildren: () => import('./pages/conductor/viaje-vivo/viaje-vivo.module').then( m => m.ViajeVivoPageModule)
   },
   {
@@ -68,7 +68,7 @@ const routes: Routes = [
   },
   {
     path: 'listar-viaje',
-    canActivate:[usuarioGuard],
+    canActivate:[loginGuard, usuarioGuard],
     loadChildren: () => import('./pages/usuario/listar-viaje/listar-viaje.module').then( m => m.ListarViajePageModule)
   },
   {

@@ -18,6 +18,7 @@ export class ViajeVivoPage implements OnInit {
   endLatLng!: { lat: number, lng: number };
   distancia: number = 0;
   viajeId!: string;
+  metodoSeleccionado!:string;
 
   constructor(
     private navCtrl: NavController,
@@ -48,7 +49,7 @@ export class ViajeVivoPage implements OnInit {
     return new Promise((resolve) => {
       this.crudServ.listarItems("Viajes").subscribe((data: any[]) => {
         // Busca el viaje por ID del documento y que el conductor sea el usuario logueado
-        const viajeConductor = data.find(viaje => viaje.id === viajeId && viaje.conductor === this.user.id);
+        const viajeConductor = data.find(viaje => viaje.id === viajeId);
 
         if (viajeConductor) {
           console.log('Viaje encontrado:', viajeConductor); // Debug para verificar los datos del viaje

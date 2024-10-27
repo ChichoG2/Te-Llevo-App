@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController, ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { CrudFirebaseService } from 'src/app/helpers/services/crud-firebase.service';
 import { AuthService } from 'src/app/helpers/services/auth.service';
 import { Usuario } from 'src/app/helpers/Usuario';
@@ -10,20 +10,16 @@ import { Usuario } from 'src/app/helpers/Usuario';
   styleUrls: ['./viaje.page.scss'],
 })
 export class ViajePage implements OnInit {
-  user!: Usuario;
+  user!: any;
   listadoItems: any[] = [];
-  allItems: any[] = [];
-  batchSize = 5; // Número de viajes cargados en cada scroll
-  hasMoreItems = true;
-  isPaymentModalOpen = false; // Controla la apertura del modal
-  selectedItem: any; // Almacena el viaje seleccionado
+  viajeSeleccionado: any = null;
+  maxUsuarios!:number;
 
   constructor(
     private navCtr: NavController,
-    private modalController: ModalController,
     private toastController: ToastController,
     private auth: AuthService,
-    private crudServ: CrudFirebaseService
+    private crudServ: CrudFirebaseService,
   ) {}
 
   ngOnInit() {
@@ -33,11 +29,8 @@ export class ViajePage implements OnInit {
 
   listar() {
     this.crudServ.listarItems('Viajes').subscribe((data: any[]) => {
-      // Ordenar los viajes por precio de menor a mayor
-      const ordenarViajes = data.sort((a, b) => a.precio - b.precio);
-
-      // Mapeo los viajes para formatear la hora
-      this.allItems = ordenarViajes.map((viaje) => {
+      // Ordena por precio y formatea la hora
+      this.listadoItems = data.sort((a, b) => a.precio - b.precio).map((viaje) => {
         const date = viaje.hora.toDate();
         const hours = date.getHours();
         const minutes = date.getMinutes();
@@ -46,70 +39,59 @@ export class ViajePage implements OnInit {
 
         return { ...viaje, formattedHour };
       });
-
-      // Cargar los primeros elementos
-      this.addMoreItems();
     });
   }
 
-  addMoreItems() {
-    const startIndex = this.listadoItems.length;
-    const nuevosItems = this.allItems.slice(startIndex, startIndex + this.batchSize);
-
-    if (nuevosItems.length > 0) {
-      this.listadoItems.push(...nuevosItems);
-    } else {
-      this.hasMoreItems = false; // Deshabilita el infinite-scroll si no hay más elementos
-    }
+  seleccionarViaje(viaje: any) {
+    this.viajeSeleccionado = viaje;
+    this.maxUsuarios = viaje.capacidadAuto;
   }
 
-  onIonInfinite(event: any) {
-    this.addMoreItems();
-
-    event.target.complete(); // Finaliza el evento de infinite scroll
-
-    // Si ya no hay más elementos, deshabilita el infinite scroll
-    if (!this.hasMoreItems) {
-      event.target.disabled = true;
-    }
-  }
-
-  onItemSelect(item: any) {
-    this.selectedItem = item; // Almacena el viaje seleccionado
-    this.isPaymentModalOpen = true; // Abre el modal
-  }
-
-  async confirmPayment() {
-    if (!this.selectedItem) {
+  async confirmarViaje() {
+    if (!this.viajeSeleccionado) {
       console.warn("No se ha seleccionado ningún viaje.");
       return;
     }
-  
-    // Agregar el ID del usuario actual al array de usuarios del viaje
-    const updatedUsers = [...this.selectedItem.usuarios, this.auth.getUser().id];
-  
-    try {
-      // Llamar al servicio para actualizar el viaje en Firebase
-      await this.crudServ.modificar("Viajes", this.selectedItem.id, { usuarios: updatedUsers });
-  
+
+    const updatedUsers = [...this.viajeSeleccionado.usuarios, this.user.id];
+    const usuariosActuales = this.viajeSeleccionado.usuarios || [];
+    const capacidadAuto = this.viajeSeleccionado.capacidadAuto;
+
+    if (usuariosActuales.length >= capacidadAuto) {
       const toast = await this.toastController.create({
-        message: `Viaje confirmado a ${this.selectedItem.destino}. ¡No llegues tarde!`,
+        message: 'Este viaje ya está lleno.',
         duration: 3000,
         position: 'top',
+        color: "danger",
+        cssClass: "toast-controller"
       });
-  
       await toast.present();
-      this.modalController.dismiss();
-      this.navCtr.navigateForward(['viaje/vivo']);
+      return;
+    }
+
+    try {
+      await this.crudServ.modificar("Viajes", this.viajeSeleccionado.id, { usuarios: updatedUsers });
+      
+      const toast = await this.toastController.create({
+        message: `Viaje confirmado a ${this.viajeSeleccionado.destino}. ¡No llegues tarde!`,
+        duration: 3000,
+        position: 'top',
+        color: 'success',
+        cssClass: "toast-controller"
+      });
+      
+      await toast.present();
+      this.navCtr.navigateForward(['/listar-viaje']);
     } catch (error) {
       console.error("Error al confirmar el viaje:", error);
       const toast = await this.toastController.create({
         message: 'Hubo un problema al confirmar el viaje. Inténtalo de nuevo.',
         duration: 3000,
         position: 'top',
+        color: "danger",
+        cssClass: "toast-controller"
       });
       await toast.present();
     }
   }
-  
 }
