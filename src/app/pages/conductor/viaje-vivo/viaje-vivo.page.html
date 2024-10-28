@@ -41,9 +41,15 @@
     <ion-button expand="block" class="mt-8 cancel" (click)="ocultarIndicaciones()">
       <p class="text-xs">Ocultar Indicaciones</p>
     </ion-button>
-    <ion-button expand="block" class="finalizar mt-8" (click)="index()">
-      <p>Finalizar Viaje</p>
-    </ion-button>
+    @if(user.esConductor){
+      <ion-button expand="block" class="finalizar mt-8" (click)="confirmarEliminacion(viajeId)">
+        <p>Finalizar Viaje</p>
+      </ion-button>
+    }@else {
+      <ion-button expand="block" class="finalizar mt-8" (click)="confirmarCancelacion(listaViaje)">
+        <p>Cancelar Viaje</p>
+      </ion-button>
+    }
   </div>
 </ion-content>
 

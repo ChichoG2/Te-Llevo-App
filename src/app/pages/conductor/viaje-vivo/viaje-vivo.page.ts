@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine'
@@ -14,20 +14,23 @@ import { AuthService } from 'src/app/helpers/services/auth.service';
 export class ViajeVivoPage implements OnInit {
   user!: any;
   map!: L.Map;
-  numeroCuenta:any = 'Efectivo';
-  usuariosEnViajes:any[] = [];
+  numeroCuenta: any = 'Efectivo';
+  usuariosEnViajes: any[] = [];
   startLatLng!: { lat: number, lng: number };
   endLatLng!: { lat: number, lng: number };
   distancia: number = 0;
   viajeId!: string;
-  metodoSeleccionado!:string;
+  listaViaje!: any;
+  metodoSeleccionado!: string;
 
   constructor(
     private navCtrl: NavController,
     private crudServ: CrudFirebaseService,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private toastCtrl: ToastController,
+    private alertController: AlertController
   ) { }
 
   async ngOnInit() {
@@ -46,12 +49,12 @@ export class ViajeVivoPage implements OnInit {
     });
 
     this.crudServ.listarItems("TarjetaAsociada").subscribe(data => {
-      try{
+      try {
         const cuenta = data.find(usuario => usuario.usuario === this.user.id);
-        if(cuenta){
+        if (cuenta) {
           this.numeroCuenta = cuenta;
         }
-      } catch(err){
+      } catch (err) {
         console.warn('Cuenta no encontrada!')
       }
     })
@@ -87,11 +90,12 @@ export class ViajeVivoPage implements OnInit {
             const distanciaCalculada = this.calcularDistancia(this.startLatLng, this.endLatLng);
             this.distancia = distanciaCalculada;
             this.loadMap();
+            this.listaViaje = viajeConductor;
 
             this.crudServ.listarItems("Usuarios").subscribe((data: any[]) => {
               const usuarios = data.filter(user => viajeConductor.usuarios.includes(user.id));
               this.usuariosEnViajes = usuarios;
-            });            
+            });
           } else {
             console.error('Coordenadas de destinoInicio o destinoFinal no válidas');
           }
@@ -170,7 +174,98 @@ export class ViajeVivoPage implements OnInit {
     }
   }
 
-  cargarTarjeta(){
-    
+  async confirmarEliminacion(id: any) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar Cancelación',
+      message: '¿Estás seguro de que deseas cancelar este viaje?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            this.mostrarMensaje("Accion cancelada!", "danger");
+          }
+        },
+        {
+          text: 'Sí',
+          handler: () => {
+            this.eliminar(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  eliminar(id: any) {
+    setTimeout(() => {
+      this.crudServ.eliminar("Viajes", id).then(() => {
+        setTimeout(() => {
+          this.mostrarMensaje("Se elimino correctamente!", "success")
+          if (this.user.esConductor) {
+            this.navCtrl.navigateForward(["/index-conductor"])
+          } else {
+            this.navCtrl.navigateForward(["/index"])
+          }
+        }, 100);
+      }).catch(() => {
+        setTimeout(() => {
+          this.mostrarMensaje("Ha ocurrido un error!", "danger")
+        }, 100);
+      })
+    }, 1500);
+  }
+
+  async mostrarMensaje(mensaje: string, color: string) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      duration: 2000,
+      position: 'top',
+      color: color,
+      cssClass: "toast-controller"
+    });
+    toast.present();
+  }
+
+  async cancelarViaje(viaje: any) {
+    const usuarioId = this.user.id;
+
+    // Eliminar el usuario del array de 'usuarios' del viaje
+    const updatedUsuarios = viaje.usuarios.filter((id: string) => id !== usuarioId);
+
+    try {
+      await this.crudServ.modificar("Viajes", viaje.id, { usuarios: updatedUsuarios });
+      setTimeout(() => {
+        this.mostrarMensaje("Has salido del viaje!", "success");
+        this.navCtrl.navigateForward(["/index"])
+      }, 100);
+    } catch (error) {
+      console.error("Error al cancelar el viaje:", error);
+    }
+  }
+
+  async confirmarCancelacion(viaje: any) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar Cancelación',
+      message: '¿Estás seguro de que deseas cancelar este viaje?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            this.mostrarMensaje("Accion cancelada!", "danger");
+          }
+        },
+        {
+          text: 'Sí',
+          handler: () => {
+            this.cancelarViaje(viaje);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
