@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/helpers/services/auth.service';
 export class ViajeVivoPage implements OnInit {
   user!: any;
   map!: L.Map;
+  numeroCuenta:any = 'Efectivo';
+  usuariosEnViajes:any[] = [];
   startLatLng!: { lat: number, lng: number };
   endLatLng!: { lat: number, lng: number };
   distancia: number = 0;
@@ -29,7 +31,6 @@ export class ViajeVivoPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    // Obtener el usuario logueado
     this.user = this.auth.getUser();
     this.viajeId = this.route.snapshot.paramMap.get('id') || '';
 
@@ -43,6 +44,17 @@ export class ViajeVivoPage implements OnInit {
     this.cargarDatosViaje(this.viajeId).then(() => {
       loading.dismiss();
     });
+
+    this.crudServ.listarItems("TarjetaAsociada").subscribe(data => {
+      try{
+        const cuenta = data.find(usuario => usuario.usuario === this.user.id);
+        if(cuenta){
+          this.numeroCuenta = cuenta;
+        }
+      } catch(err){
+        console.warn('Cuenta no encontrada!')
+      }
+    })
   }
 
   cargarDatosViaje(viajeId: string): Promise<void> {
@@ -52,7 +64,7 @@ export class ViajeVivoPage implements OnInit {
         const viajeConductor = data.find(viaje => viaje.id === viajeId);
 
         if (viajeConductor) {
-          console.log('Viaje encontrado:', viajeConductor); // Debug para verificar los datos del viaje
+          console.log('Viaje encontrado:', viajeConductor);
 
           // Verificar que destinoInicio y destinoFinal tengan lat y lng
           if (
@@ -75,6 +87,11 @@ export class ViajeVivoPage implements OnInit {
             const distanciaCalculada = this.calcularDistancia(this.startLatLng, this.endLatLng);
             this.distancia = distanciaCalculada;
             this.loadMap();
+
+            this.crudServ.listarItems("Usuarios").subscribe((data: any[]) => {
+              const usuarios = data.filter(user => viajeConductor.usuarios.includes(user.id));
+              this.usuariosEnViajes = usuarios;
+            });            
           } else {
             console.error('Coordenadas de destinoInicio o destinoFinal no válidas');
           }
@@ -149,7 +166,11 @@ export class ViajeVivoPage implements OnInit {
   ocultarIndicaciones() {
     const routingContainer = document.querySelector('.leaflet-routing-container');
     if (routingContainer) {
-      routingContainer.classList.toggle('hidden'); // Añade o quita la clase 'hidden'
+      routingContainer.classList.toggle('hidden');
     }
+  }
+
+  cargarTarjeta(){
+    
   }
 }

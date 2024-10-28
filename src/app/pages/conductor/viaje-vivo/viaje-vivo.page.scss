@@ -1,7 +1,3 @@
-ion-content{
-    --background: #AFAFAF;
-}
-
 ion-button{
     --background: #F1F1F1;
     width: 181px;
@@ -16,6 +12,10 @@ ion-button p{
 ion-button span{
     background: #172554;
     background-clip: text;
+}
+
+ion-card-title{
+    --color: #fff;
 }
 
 .cancel{
