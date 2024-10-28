@@ -28,15 +28,18 @@ export class ViajePage implements OnInit {
   }
 
   listar() {
+    const usuarioId = this.user.id;
     this.crudServ.listarItems('Viajes').subscribe((data: any[]) => {
+      const viajesFiltrados = data.filter((viaje) => !viaje.usuarios.includes(usuarioId));
+
       // Ordena por precio y formatea la hora
-      this.listadoItems = data.sort((a, b) => a.precio - b.precio).map((viaje) => {
+      this.listadoItems = viajesFiltrados.sort((a, b) => a.precio - b.precio).map((viaje) => {
         const date = viaje.hora.toDate();
         const hours = date.getHours();
         const minutes = date.getMinutes();
         const ampm = hours >= 12 ? 'PM' : 'AM';
         const formattedHour = (hours % 12 || 12) + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
-
+  
         return { ...viaje, formattedHour };
       });
     });
